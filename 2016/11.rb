@@ -19,8 +19,28 @@ floors = input.map do |line|
   floor
 end
 
+initial_state = {elevator: 0, floors: floors}
+
 def get_moves(floors)
 
+end
+
+#proposed_state = [[[:chip, :hydrogen], 1]] or [[[:chip, :hydrogen], 1], [[:chip, :lithium], 1]]
+def is_move_valid(current_state, proposed_change)
+  proposed_floor = current_state[:elevator] + proposed_change[:elevator]
+  return false if proposed_change.length < 2 || proposed_change.length > 3
+  return false if proposed_floor < 0 || proposed_floor > 4
+  proposed_state = get_new_state(current_state, proposed_change)
+  proposed_state[:floors].each do |item|
+    if item[:]
+  end
+end
+
+def get_new_state(current_state, proposed_change)
+  new_state = current_state.clone
+  new_state[:elevator] += proposed_change[:elevator]
+  proposed_change[:]
+  new_state[:floors][current_state[:elevator]].delete()
 end
 
 moves = []

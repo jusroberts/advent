@@ -75,7 +75,8 @@ step = 0
 array[1][1] = "O"
 def print(array, step)
   array.each do |a|
-    puts a.join.gsub("O", "\e[31mO\e[0m")
+    str = a.join.gsub("O", "\e[31mO\e[0m")
+    puts str.gsub("A", "\e[32mA\e[0m")
   end
   puts array.flatten.select {|a| a == "O" || a == "X"}.length
   puts step

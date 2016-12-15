@@ -3,10 +3,6 @@ require 'pry-byebug'
 
 salt = "abc"
 salt = "ahsbgdzn"
-iteration = 0
-
-possible_hits = []
-positive_hits = []
 
 def check_hash(hash, iteration)
   (0..hash.length - 4).each do |i|
@@ -34,12 +30,13 @@ def hash_n_times(salt, iteration, times)
   hash
 end
 
+iteration = 0
+
+possible_hits = []
+positive_hits = []
+
 while positive_hits.length < 65
   test_hash = hash_n_times(salt, iteration, 2016)
-  # puts test_hash
-  # binding.pry
-  # puts iteration
-  # binding.pry if iteration == 102
   a = check_hash(test_hash, iteration)
   possible_hits << a if a
 
@@ -49,13 +46,6 @@ while positive_hits.length < 65
       next if p[:iteration] == iteration
       char = p[:char]
       if test_hash[i, 5] == "#{char}#{char}#{char}#{char}#{char}"
-        # old_hash = Digest::MD5.hexdigest("#{salt}#{p[:iteration]}").downcase
-        # binding.pry
-        # puts p[:iteration]
-        p[:found_hash] = test_hash
-        p[:found_iteration] = iteration
-        p[:delta_iteration] = iteration - p[:iteration]
-        # p[:orig_hash] = 
         positive_hits << p
         remove_from_possible << index
       end

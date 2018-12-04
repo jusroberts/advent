@@ -271,3 +271,27 @@ input.split("\n").each do |a|
 end
 
 puts double_letters * triple_letters
+
+inputs = input.split("\n")
+inputs.each_with_index do |a, i|
+  chars_original = a.split("")
+  (i+1..inputs.length-1).each do |b|
+    current = inputs[b]
+    current_chars = current.split("")
+    num_off = 0
+    chars_original.each_with_index do |c, index|
+      if (c != current_chars[index])
+        num_off += 1
+      end
+      break if num_off > 1
+    
+    end
+    if num_off == 1
+      puts a
+      puts current
+      exit
+    end
+  end
+end
+
+puts "error"
